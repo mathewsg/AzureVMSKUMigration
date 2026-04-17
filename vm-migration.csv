@@ -1,2 +1,2 @@
 SubscriptionId,ResourceGroupName,VmName,TargetVmSize,SnapshotNamePrefix,SkipPageFileUpdate,SkipSnapshots,ReportOnly,RollbackOnFailure
-4205fd36-dcf4-4155-b56b-e7130ffa4197,b-series-vm-rg-02,b-series-vme-02,Standard_B2s_v2,snapshot,FALSE,FALSE,FALSE,FALSE
+xxxxxxxxxxxxxxxxxxxxxxxxx,b-series-vm-rg-02,b-series-vme-02,Standard_B2s_v2,snapshot,FALSE,FALSE,FALSE,FALSE
