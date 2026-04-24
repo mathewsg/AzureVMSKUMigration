@@ -36,23 +36,29 @@ For each VM, the script performs the following high-level steps:
 
 ### Single VM mode (mandatory)
 
-- `-SubscriptionId`
-- `-ResourceGroupName`
-- `-VmName`
-- `-TargetVmSize`
+| Parameter | Type | Description |
+|---|---|---|
+| `-SubscriptionId` | String | Azure subscription ID containing the target VM. |
+| `-ResourceGroupName` | String | Resource group name where the VM resides. |
+| `-VmName` | String | Name of the VM to migrate. |
+| `-TargetVmSize` | String | Target Azure VM SKU size (e.g. `Standard_B2s_v2`). |
 
 ### Batch mode (mandatory)
 
-- `-CsvPath`
+| Parameter | Type | Description |
+|---|---|---|
+| `-CsvPath` | String | Path to a CSV file containing one row per VM to migrate. The file must exist and be readable. See [CSV Format](#csv-format-batch) for required columns. |
 
 ### Optional switches and values
 
-- `-SnapshotNamePrefix` (default: `pre-bsv2-migration`)
-- `-SkipPageFileUpdate`
-- `-SkipSnapshots`
-- `-ReportOnly`
-- `-RollbackOnFailure`
-- `-Force`
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `-SnapshotNamePrefix` | String | `pre-bsv2-migration` | Prefix applied to all snapshot and new managed disk names created during migration. Combined with VM name and a timestamp. |
+| `-SkipPageFileUpdate` | Switch | `false` | Skip the in-guest script that moves the Windows page file to `C:` before migration. Use this for Linux VMs or when the page file is already on `C:`. |
+| `-SkipSnapshots` | Switch | `false` | Skip snapshot and new managed disk creation. The migration reuses existing disks directly. Faster but provides no disk-level rollback point. |
+| `-ReportOnly` | Switch | `false` | Print a summary of what would be migrated without making any changes. Useful for pre-migration review. |
+| `-RollbackOnFailure` | Switch | `false` | If the new VM creation fails after the original VM has been deleted, automatically attempt to recreate the original VM with its original size and disks. |
+| `-Force` | Switch | `false` | Suppresses confirmation prompts for destructive operations (Stop-AzVM, Remove-AzVM). Recommended for unattended/batch runs. |
 
 ## CSV Format (Batch)
 
